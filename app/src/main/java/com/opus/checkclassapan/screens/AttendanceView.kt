@@ -22,12 +22,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.opus.checkclassapan.data.Student
 import com.opus.checkclassapan.data.students as studentList
 import com.opus.checkclassapan.ui.composables.CheckClassFloatingActionButton
 import com.opus.checkclassapan.ui.composables.CheckClassTopAppBar
-
-// This view refers to AttendancePrototype.png
 
 @Composable
 fun AttendanceView() {

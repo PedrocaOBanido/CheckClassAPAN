@@ -1,6 +1,10 @@
 package com.opus.checkclassapan.data
 
-data class Student(val id: String, val name: String, val isPresent: Boolean = false)
+data class Student(
+    val id: String,
+    val name: String,
+    val isPresent: Boolean = false
+)
 
 val students = listOf(
     Student("123", "Fulano de Tal"),
