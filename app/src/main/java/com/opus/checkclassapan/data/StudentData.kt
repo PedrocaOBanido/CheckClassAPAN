@@ -1,13 +1,13 @@
 package com.opus.checkclassapan.data
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+
 data class Student(
     val id: String,
     val name: String,
-    val isPresent: Boolean = false
-)
-
-val students = listOf(
-    Student("123", "Fulano de Tal"),
-    Student("456", "Ciclano de Tal"),
-    Student("789", "Beltrano de Tal")
-)
+    initialIsPresent: Boolean = false
+) {
+    var isPresent by mutableStateOf(initialIsPresent)
+}
