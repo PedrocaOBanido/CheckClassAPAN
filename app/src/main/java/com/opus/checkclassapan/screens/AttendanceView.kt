@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.opus.checkclassapan.ui.composables.CheckClassFloatingActionButton
 import com.opus.checkclassapan.ui.composables.CheckClassTopAppBar
-import com.opus.checkclassapan.ui.theme.CheckClassApanTheme
+import com.opus.checkclassapan.ui.theme.CheckClassAPANTheme
 import com.opus.checkclassapan.viewmodel.AppViewModelProvider
 import com.opus.checkclassapan.viewmodel.AttendanceViewModel
 
@@ -81,9 +81,9 @@ fun AttendanceView(attendanceViewModel: AttendanceViewModel = viewModel(factory 
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Checkbox(
-                                checked = uiState.studentPresence[student.id] ?: true,
+                                checked = uiState.studentPresence[student.id.toString()] ?: true,
                                 onCheckedChange = { isChecked ->
-                                    attendanceViewModel.toggleStudent(student.id, isChecked)
+                                    attendanceViewModel.toggleStudent(student.id.toString(), isChecked)
                                 }
                             )
                             Text(
@@ -104,7 +104,7 @@ fun AttendanceView(attendanceViewModel: AttendanceViewModel = viewModel(factory 
 @Preview(showBackground = true)
 @Composable
 fun AttendanceViewPreview() {
-    CheckClassApanTheme {
+    CheckClassAPANTheme {
         AttendanceView()
     }
 }
