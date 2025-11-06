@@ -10,6 +10,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -113,7 +114,7 @@ val AbsentColor = Color(0xFFF44336)  // Red
 // --- Main Screen Composable ---
 
 @Composable
-fun AttendanceScreen(viewModel: MockAttendanceViewModel = MockAttendanceViewModel()) {
+fun AttendanceView(viewModel: MockAttendanceViewModel = MockAttendanceViewModel(), modifier: Modifier = Modifier) {
     val uiState by viewModel.uiState.collectAsState()
 
     Scaffold(
@@ -122,7 +123,7 @@ fun AttendanceScreen(viewModel: MockAttendanceViewModel = MockAttendanceViewMode
         bottomBar = { BottomNavigationBar() }
     ) { innerPadding ->
         Column(
-            modifier = Modifier
+            modifier = modifier
                 .padding(innerPadding)
                 .fillMaxSize()
         ) {
@@ -140,7 +141,7 @@ fun AttendanceScreen(viewModel: MockAttendanceViewModel = MockAttendanceViewMode
                             viewModel.updateStudentAttendance(student.id, status)
                         }
                     )
-                    Divider(color = CardBackground, thickness = 1.dp)
+                    HorizontalDivider(color = CardBackground, thickness = 1.dp)
                 }
 
                 item {
@@ -201,7 +202,7 @@ fun ClassHeader(uiState: AttendanceUiState, onMarkAllClick: () -> Unit) {
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             HeaderActionButton(text = "All students", icon = Icons.Filled.Group)
-            HeaderActionButton(text = "Status", icon = Icons.Filled.List)
+            HeaderActionButton(text = "Status", icon = Icons.AutoMirrored.Filled.List)
             HeaderActionButton(text = "Mark all", icon = Icons.Filled.DoneAll, onClick = onMarkAllClick)
         }
         Spacer(modifier = Modifier.height(16.dp))
@@ -283,7 +284,6 @@ fun StudentAttendanceRow(
         // Status Buttons
         StatusButton(
             text = "Present",
-            status = AttendanceStatus.Present,
             isSelected = currentStatus == AttendanceStatus.Present,
             color = PresentColor,
             onClick = { onStatusChange(AttendanceStatus.Present) }
@@ -291,7 +291,6 @@ fun StudentAttendanceRow(
         Spacer(modifier = Modifier.width(8.dp))
         StatusButton(
             text = "Late",
-            status = AttendanceStatus.Late,
             isSelected = currentStatus == AttendanceStatus.Late,
             color = LateColor,
             onClick = { onStatusChange(AttendanceStatus.Late) }
@@ -299,7 +298,6 @@ fun StudentAttendanceRow(
         Spacer(modifier = Modifier.width(8.dp))
         StatusButton(
             text = "Absent",
-            status = AttendanceStatus.Absent,
             isSelected = currentStatus == AttendanceStatus.Absent,
             color = AbsentColor,
             onClick = { onStatusChange(AttendanceStatus.Absent) }
@@ -310,7 +308,6 @@ fun StudentAttendanceRow(
 @Composable
 fun StatusButton(
     text: String,
-    status: AttendanceStatus,
     isSelected: Boolean,
     color: Color,
     onClick: () -> Unit
@@ -460,8 +457,8 @@ fun BottomNavigationBar() {
 
 @Preview(showBackground = true)
 @Composable
-fun AttendanceScreenPreview() {
+fun AttendanceViewPreview() {
     // You'd need to wrap this in your app theme if it sets up specific typography/colors
     // For this example, we'll use Material3 defaults combined with our custom colors
-    AttendanceScreen(viewModel = MockAttendanceViewModel())
+    AttendanceView(viewModel = MockAttendanceViewModel())
 }
