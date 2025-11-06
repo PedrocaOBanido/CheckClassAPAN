@@ -54,10 +54,9 @@ fun AttendanceView(attendanceViewModel: AttendanceViewModel = viewModel(factory 
                 .padding(16.dp)
                 .fillMaxSize()
         ) {
-            if (uiState.classWithStudents.isNotEmpty()) {
-                val firstClass = uiState.classWithStudents[0]
+            if (uiState.students.isNotEmpty()) {
                 Text(text = "Data: 05/11/2025")
-                Text(text = "Turma: ${firstClass.schoolClass.name}")
+                Text(text = "Turma: ${uiState.schoolClass?.name}")
 
                 Row(
                     modifier = Modifier
@@ -74,7 +73,7 @@ fun AttendanceView(attendanceViewModel: AttendanceViewModel = viewModel(factory 
                 }
 
                 LazyColumn {
-                    itemsIndexed(firstClass.students) { index, student ->
+                    itemsIndexed(uiState.students) { _, student ->
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -88,7 +87,7 @@ fun AttendanceView(attendanceViewModel: AttendanceViewModel = viewModel(factory 
                                 }
                             )
                             Text(
-                                text = "${student.name} - ${student.id}",
+                                text = student.name,
                                 modifier = Modifier.padding(start = 8.dp)
                             )
                         }
